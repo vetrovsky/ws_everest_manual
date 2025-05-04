@@ -46,7 +46,13 @@ volání v xml syntaxi:
 ```
 
 3. Názvy všech elementů jsou závislé na velikosti písmen (case sensitive). Číselné hodnoty v desetinném tvaru se zadávají s desetinnou tečkou (např. 1234.56). Všechny hodnoty musí být v uvozovkách. Kódování je UTF-8. 
-4. Všechny metody v případě chyby nebo nesprávně zadaných budou vracet **ErrorResponse**. V případě úspěšného zpracování bude vrácen **Response** jak je popsáno v časti popis metod. 
+4. Všechny metody v případě chyby nebo nesprávně zadaných budou vracet **ErrorResponse**. V případě úspěšného zpracování bude vrácen **Response** ve formátu, jak je popsáno v časti popis metod. Formát **ErrorResponse**:
+
+| Jméno pole  | Popis pole    | Typ/délka znaků | Použití | Příklad hodnot          |
+|-------------|---------------|-----------------|---------|-------------------------|
+| ErrorNo     | Číslo chyby   | int             |         | 13                      |
+| ErrorDesc   | Popis chyby   | char/255        |         | "Missing birth date"    |
+
 5.	Interaktivní tester naleznete na https://ws.everest2003.cz/tester.php
 
 
@@ -56,8 +62,8 @@ volání v xml syntaxi:
 Na základě smlouvy s pojišťovnou je provozovatelem zpřístupněné produkty dané pojišťovny. V současné době jsou dostupné tyto sady:
 
 - UNIQA pojišťovna, a.s. 
-- Generali Česká pojišťovna a.s. 
-- INTER PARTNER ASSISTANCE S. A.
+- Generali Česká pojišťovna a.s. (GČP)
+- INTER PARTNER ASSISTANCE S. A. (IPA)
 
 ### UNIQA pojišťovna, a.s.
 
@@ -77,16 +83,17 @@ Na základě smlouvy s pojišťovnou je provozovatelem zpřístupněné produkty
 
 - Způsob zadávání produktů 
 
-|Zkratka|InsProdukt |InsType|Poznámka|
-|-      |-          |-      |-   |
-|nD5S    |D5S         |t      | pouze ČR|
-|nD5S+   |D5S         |zs     ||
-|nK5    |K5         |t      ||
-|nK5+   |K5         |zs     ||
-|nK10    |K10         |t      ||
-|nK10+   |K10         |zs     ||
-|nK15    |K15         |t      ||
-|nK15+   |K15         |zs     ||
+| Zkratka | InsProdukt | InsType | Poznámka                                           |
+|---------|------------|---------|----------------------------------------------------|
+| nD5S    | D5S        | t       | pouze ČR, turs, se stornem                         |
+| nD5S+   | D5S        | zs      | pouze ČR, zimní, se stornem                        |
+| nK5     | K5         | t       | Evropa/svět, turs, bez storna                      |
+| nK5+    | K5         | zs      | Evropa/svět, zimní, bez storna                     |
+| nK10    | K10        | t       | Evropa/svět, exclusiv turs, bez storna             |
+| nK10+   | K10        | zs      | Evropa/svět, exclusiv zimní, bez storna            |
+| nK15    | K15        | t       | Evropa/svět, exclusiv turs, bez storna             |
+| nK15+   | K15        | zs      | Evropa/svět, exclusiv zimní, bez storna            |
+
   
 ### Individuální sazby UNIQA pojišťovna, a.s. 
 
@@ -104,16 +111,17 @@ Na základě smlouvy s pojišťovnou je provozovatelem zpřístupněné produkty
 
 - Způsob zadávání produktů 
 
-| Zkratka | InsProdukt | InsType | Poznámka       |
-|---------|------------|---------|----------------|
-| nD5S    | D5S        | t       | pouze pro ČR   |
-| nD5S+   | D5S        | zs      | pouze pro ČR   |
-| nIK5    | IK5        | t       |                |
-| nIK5+   | IK5        | zs      |                |
-| nIK10   | IK10       | t       |                |
-| nIK10+  | IK10       | zs      |                |
-| nIK15   | IK15       | t       |                |
-| nIK15+  | IK15       | zs      |                |
+| Zkratka | InsProdukt | InsType | Poznámka                                           |
+|---------|------------|---------|----------------------------------------------------|
+| nD5S    | D5S        | t       | pouze pro ČR, turs, se stornem                    |
+| nD5S+   | D5S        | zs      | pouze pro ČR, zimní, se stornem                   |
+| nIK5    | IK5        | t       | Evropa/svět, turs, bez storna, individuál         |
+| nIK5+   | IK5        | zs      | Evropa/svět, zimní, bez storna, individuál        |
+| nIK10   | IK10       | t       | Evropa/svět, exclusiv turs, bez storna, individuál|
+| nIK10+  | IK10       | zs      | Evropa/svět, exclusiv zimní, bez storna, individuál|
+| nIK15   | IK15       | t       | Evropa/svět, exclusiv turs, bez storna, individuál|
+| nIK15+  | IK15       | zs      | Evropa/svět, exclusiv zimní, bez storna, individuál|
+
 
 ### Generali Česká pojišťovna a.s. pojištění k letenkám 
 
@@ -131,28 +139,23 @@ Na základě smlouvy s pojišťovnou je provozovatelem zpřístupněné produkty
 
 - Způsob zadávání produktů:
    
-  | Zkratka              | InsProduct | CancProduct | Poznámka |
-  |----------------------|------------|-------------|----------|
-  | Rozsah09            | Rozsah09   | -           |          |
-  | Rozsah10            | Rozsah10   | -           |          |
-  | Rozsah09 + Rozsah04 | Rozsah09   | Rozsah04    |          |
-  | Rozsah09 + Rozsah05 | Rozsah09   | Rozsah05    |          |
-  | Rozsah09 + Rozsah06 | Rozsah09   | Rozsah06    |          |
-  | Rozsah10 + Rozsah04 | Rozsah10   | Rozsah04    |          |
-  | Rozsah10 + Rozsah05 | Rozsah10   | Rozsah05    |          |
-  | Rozsah10 + Rozsah06 | Rozsah10   | Rozsah06    |          |
-  | Rozsah35            | Rozsah35   | -           |          |
-  | Rozsah36            | Rozsah36   | -           |          |
-  | Rozsah37            | Rozsah37   | -           |          |
-  | Rozsah09 + Rozsah14 | Rozsah09   | Rozsah14    |          |
-  | Rozsah09 + Rozsah15 | Rozsah09   | Rozsah15    |          |
-  | Rozsah09 + Rozsah16 | Rozsah09   | Rozsah16    |          |
-  | Rozsah10 + Rozsah14 | Rozsah10   | Rozsah14    |          |
-  | Rozsah10 + Rozsah15 | Rozsah10   | Rozsah15    |          |
-  | Rozsah10 + Rozsah16 | Rozsah10   | Rozsah16    |          |
-  | Rozsah11            | Rozsah11   | -           |          |
-  | Rozsah12            | Rozsah12   | -           |          |
-  | Rozsah13            | Rozsah13   | -           |          |
+  | Zkratka              | InsProduct | CancProduct | Poznámka                                                       |
+|----------------------|------------|-------------|----------------------------------------------------------------|
+| Rozsah09             | Rozsah09   | -           | Storno letenky 10.000 Kč, SÚ 0 %                               |
+| Rozsah10             | Rozsah10   | -           | Storno letenky 50.000 Kč, SÚ 0 %                               |
+| Rozsah35             | Rozsah35   | -           | Komplet svět 60 dní turist, LV 10 mil., storno 100t., SÚ 0 %  |
+| Rozsah36             | Rozsah36   | -           | Komplet svět 60 dní pracovní, LV 10 mil., storno 100t., SÚ 0 %|
+| Rozsah37             | Rozsah37   | -           | Komplet svět 60 dní rekreacní sport, LV 10 mil., storno 100t., SÚ 0 %|
+| Rozsah09 + Rozsah14  | Rozsah09   | Rozsah14    | Storno 10.000 Kč + komplet svět bez storna, turist, LV 10 mil.|
+| Rozsah09 + Rozsah15  | Rozsah09   | Rozsah15    | Storno 10.000 Kč + komplet svět bez storna, pracovní, LV 10 mil.|
+| Rozsah09 + Rozsah16  | Rozsah09   | Rozsah16    | Storno 10.000 Kč + komplet svět bez storna, rekreacní sport, LV 10 mil.|
+| Rozsah10 + Rozsah14  | Rozsah10   | Rozsah14    | Storno 50.000 Kč + komplet svět bez storna, turist, LV 10 mil.|
+| Rozsah10 + Rozsah15  | Rozsah10   | Rozsah15    | Storno 50.000 Kč + komplet svět bez storna, pracovní, LV 10 mil.|
+| Rozsah10 + Rozsah16  | Rozsah10   | Rozsah16    | Storno 50.000 Kč + komplet svět bez storna, rekreacní sport, LV 10 mil.|
+| Rozsah11             | Rozsah11   | -           | Komplet svět 60 dní turist, LV 10 mil., storno 100t., SÚ 20 % |
+| Rozsah12             | Rozsah12   | -           | Komplet svět 60 dní pracovní, LV 10 mil., storno 100t., SÚ 20 %|
+| Rozsah13             | Rozsah13   | -           | Komplet svět 60 dní rekreacní sport, LV 10 mil., storno 100t., SÚ 20 %|
+
 
 ### Generali Česká pojišťovna a.s. pojištění krátkodobých pobytů 
 
@@ -168,25 +171,26 @@ Na základě smlouvy s pojišťovnou je provozovatelem zpřístupněné produkty
 - Prodejní ceny a limity plnění jsou dostupné na stránkách (vyžaduje přihlášení):
   - https://www.everest2003.cz/modules.php?name=help
 
-| Zkratka  | InsProduct | Poznámka |
-|----------|------------|----------|
-| Rozsah07 | Rozsah07   |          |
-| Rozsah08 | Rozsah08   |          |
-| Rozsah11 | Rozsah11   |          |
-| Rozsah12 | Rozsah12   |          |
-| Rozsah13 | Rozsah13   |          |
-| Rozsah14 | Rozsah14   |          |
-| Rozsah15 | Rozsah15   |          |
-| Rozsah16 | Rozsah16   |          |
-| Rozsah35 | Rozsah35   |          |
-| Rozsah36 | Rozsah36   |          |
-| Rozsah37 | Rozsah37   |          |
-| Rozsah41 | Rozsah41   |          |
-| Rozsah42 | Rozsah42   |          |
-| Rozsah43 | Rozsah43   |          |
-| Rozsah44 | Rozsah44   |          |
-| Rozsah45 | Rozsah45   |          |
-| Rozsah46 | Rozsah46   |          |
+| Zkratka  | InsProduct | Poznámka                                                                 |
+|----------|------------|--------------------------------------------------------------------------|
+| Rozsah07 | Rozsah07   | Turista svět, LV 6 mil., riziková cesta, storno 100 tis., SÚ 20 %       |
+| Rozsah08 | Rozsah08   | Turista svět, LV 6 mil., riziková cesta, bez storna                     |
+| Rozsah11 | Rozsah11   | Komplet svět 60 dní, turist, LV 10 mil., storno 100 tis., SÚ 20 %       |
+| Rozsah12 | Rozsah12   | Komplet svět 60 dní, pracovní, LV 10 mil., storno 100 tis., SÚ 20 %     |
+| Rozsah13 | Rozsah13   | Komplet svět 60 dní, rekreační sport, LV 10 mil., storno 100 tis., SÚ 20 % |
+| Rozsah14 | Rozsah14   | Komplet svět bez storna 60 dní, turist, LV 10 mil.                      |
+| Rozsah15 | Rozsah15   | Komplet svět bez storna 60 dní, pracovní, LV 10 mil.                    |
+| Rozsah16 | Rozsah16   | Komplet svět bez storna 60 dní, rekreační sport, LV 10 mil.             |
+| Rozsah35 | Rozsah35   | Komplet svět 60 dní, turist, LV 10 mil., storno 100 tis., SÚ 0 %        |
+| Rozsah36 | Rozsah36   | Komplet svět 60 dní, pracovní, LV 10 mil., storno 100 tis., SÚ 0 %      |
+| Rozsah37 | Rozsah37   | Komplet svět 60 dní, rekreační sport, LV 10 mil., storno 100 tis., SÚ 0 % |
+| Rozsah41 | Rozsah41   | Komplet bez USA 30 dní, turist, LV 10 mil., storno 50 tis., SÚ 20 %     |
+| Rozsah42 | Rozsah42   | Komplet bez USA 30 dní, pracovní, LV 10 mil., storno 50 tis., SÚ 20 %   |
+| Rozsah43 | Rozsah43   | Komplet bez USA 30 dní, rekreační sport, LV 10 mil., storno 50 tis., SÚ 20 % |
+| Rozsah44 | Rozsah44   | Komplet bez USA 30 dní, turist, LV 10 mil., storno 50 tis., SÚ 0 %      |
+| Rozsah45 | Rozsah45   | Komplet bez USA 30 dní, pracovní, LV 10 mil., storno 50 tis., SÚ 0 %    |
+| Rozsah46 | Rozsah46   | Komplet bez USA 30 dní, rekreační sport, LV 10 mil., storno 50 tis., SÚ 0 % |
+
 
 ### Generali Česká pojišťovna a.s. pojištění dlouhodobých pobytů 
 
@@ -204,22 +208,23 @@ Na základě smlouvy s pojišťovnou je provozovatelem zpřístupněné produkty
 
 - Způsob zadávání produktů: 
 
-| Zkratka    | InsProduct | Poznámka       |
-|------------|------------|----------------|
-| Rozsah17   | Rozsah17   | -              |
-| Rozsah18   | Rozsah18   | -              |
-| Rozsah19   | Rozsah19   | -              |
-| Rozsah20   | Rozsah20   | -              |
-| Rozsah21   | Rozsah21   | -              |
-| Rozsah22   | Rozsah22   | -              |
-| Rozsah23   | Rozsah23   | -              |
-| Rozsah24   | Rozsah24   | -              |
-| Rozsah25   | Rozsah25   | -              |
-| Rozsah26   | Rozsah26   | -              |
-| Rozsah27   | Rozsah27   | -              |
-| Rozsah28   | Rozsah28   | -              |
+| Zkratka    | InsProduct | Poznámka                                                                 |
+|------------|------------|--------------------------------------------------------------------------|
+| Rozsah17   | Rozsah17   | Komplet svět 90 dní, rekreační sport do 70 let, LV 10 mil.               |
+| Rozsah18   | Rozsah18   | Komplet svět 180 dní, rekreační sport do 70 let, LV 10 mil.              |
+| Rozsah19   | Rozsah19   | Komplet svět 365 dní, rekreační sport do 70 let, LV 10 mil.              |
+| Rozsah20   | Rozsah20   | Komplet svět 90 dní, rekreační sport do 70 let, LV 100 mil.              |
+| Rozsah21   | Rozsah21   | Komplet svět 180 dní, rekreační sport do 70 let, LV 100 mil.             |
+| Rozsah22   | Rozsah22   | Komplet svět 365 dní, rekreační sport do 70 let, LV 100 mil.             |
+| Rozsah23   | Rozsah23   | Komplet svět 90 dní, rekreační sport do 70 let, LV 10 mil., prolongační   |
+| Rozsah24   | Rozsah24   | Komplet svět 180 dní, rekreační sport do 70 let, LV 10 mil., prolongační  |
+| Rozsah25   | Rozsah25   | Komplet svět 365 dní, rekreační sport do 70 let, LV 10 mil., prolongační  |
+| Rozsah26   | Rozsah26   | Komplet svět 90 dní, rekreační sport do 70 let, LV 100 mil., prolongační  |
+| Rozsah27   | Rozsah27   | Komplet svět 180 dní, rekreační sport do 70 let, LV 100 mil., prolongační |
+| Rozsah28   | Rozsah28   | Komplet svět 365 dní, rekreační sport do 70 let, LV 100 mil., prolongační |
 
-### INTER PARTNER ASSISTANCE S. A. (AXA)
+
+### INTER PARTNER ASSISTANCE S. A. (IPA)
 
 - Označená sady **InsId**: 
   -  A
@@ -257,7 +262,7 @@ Na základě smlouvy s pojišťovnou je provozovatelem zpřístupněné produkty
 
 ## Popis metod
 
-### Dotaz na získání ceny bez uložení záznamu (`[InsuranceOrder]`)
+### Dotaz na získání nabídky produktů (`[InsuranceOrder]`)
 
 | Název pole   | Popis                             | Typ / Formát         | Povinné  | Poznámka |
 |--------------|------------------------------------|-----------------------|-----------|----------|
@@ -279,29 +284,186 @@ Na základě smlouvy s pojišťovnou je provozovatelem zpřístupněné produkty
 
 \* `Area` a `Country` – musí být vyplněno alespoň jedno z nich.
 
-#### Příklad dotazu na získání ceny bez uložení záznamu
+#### Příklad dotazu 
 
 ```json
 {
-  "UserKey": "41059e28e30af11f62473ee29a93b2e1",
-  "OrderId": "20141010",
-  "DateFrom": "10.10.2025",
-  "DateTo": "15.10.2025",
-  "NumPerson": 2,
-  "Area": "E",
-  "InsId": "W",
-  "InsType": "t",
-  "CancValue": 50,
-  "TourPrice": 20000.0,
-  "Currency": "CZK",
-  "Email": "vir2al3vel@gmail.com",
-  "Ticketing": "A",
-  "Status": "K"
+   "InsuranceOrder":{
+      "UserKey":"41059e28e30af11f62473ee29a93b2e1",
+      "OrderId":"20251010",
+      "DateFrom":"10.10.2025",
+      "DateTo":"15.10.2025",
+      "NumPerson":2,
+      "Area":"E",
+      "InsId":"W",
+      "InsType":"t",
+      "CancValue":50,
+      "TourPrice":20000,
+      "Currency":"CZK",
+      "Email":"vir2al3vel@gmail.com",
+      "Ticketing":"N",
+      "Status":"K"
+   }
 }
 
 ```
 
+#### Struktura odpovědi: `InsuranceResponse`
+
+| Název pole           | Popis                                     | Typ / Formát     | Poznámka |
+|----------------------|--------------------------------------------|------------------|----------|
+| `ProductData`        | Sada kalkulovaných produktů                | `object`         | Obsahuje 1..N položek ve tvaru `Product_X` |
+
+Struktura objektu `Product_X` (např. `Product_1`)
+
+| Název pole     | Popis                                              | Typ / Formát     | Poznámka |
+|----------------|-----------------------------------------------------|------------------|----------|
+| `InsProduct`   | Kód pojistného produktu                            | `string` (max 5) | Např. `IK5S` |
+| `TotalPremium` | Celková výše pojistného                           | `float`          | V měně dle pole `Currency` |
+| `Currency`     | Měna pojistného                                    | `string` (3 znaky) | Např. `CZK` |
+| `Description`  | Popis produktu                                     | `string`         | Lidsky čitelný název produktu |
+| `InsId`        | Kód pojišťovny                                     | `string` (1 znak) | Např. `S` (viz číselník pojišťoven) |
 
 
+#### Příklad odpovědi
+
+```json
+    "InsuranceResponse": {
+        "ProductData": {
+            "Product_1": {
+                "InsProduct": "IK5S",
+                "TotalPremium": 408,
+                "Currency": "CZK",
+                "Description": "Komplet se stornem turs individuál 2019 UNIQA",
+                "InsId": "S"
+            },
+...
+```
+
+### Kalkulace/Objednávka/Vytvoření pojištění pro konkrétní osoby (`[InsuranceOrder]`)
+
+#### Definice parametrů metody:
+
+| Název pole    | Popis                             | Typ / Formát           | Povinné  | Poznámka |
+|---------------|------------------------------------|------------------------|----------|----------|
+| `UserKey`     | Identifikátor prodejce            | `string` (max 64)      | Ano      | Slouží k autorizaci dotazu |
+| `OrderId`     | Číslo objednávky                  | `string` (max 30)      | Ne      | Vlastní číselná řada |
+| `DateFrom`    | Počátek pojištění                 | `date` (`dd.mm.yyyy`)  | Ano      | - |
+| `DateTo`      | Konec cesty                        | `date` (`dd.mm.yyyy`)  | Ano      | - |
+| `Area`        | Riziková oblast                   | `enum`                 | Ne*      | `E` - Evropa, `W` - Svět. **Povinné**, pokud není vyplněno `Country` |
+| `Country`     | Cílová země                       | `string` (3 znaky)     | Ne*      | ISO 3166-1 alpha-3. **Povinné**, pokud není vyplněno `Area` |
+| `InsId`       | Kód pojišťovny                    | `enum`                 | Ne      | Viz číselník |
+| `InsType`     | Typ pojištění                     | `enum`                 | Ano      | `t` - turistická, `zs` - zimní sporty |
+| `PlateNumber` | Registrační značka vozidla        | `string` (max 7)       | Podmíněně| Povinné pro sazby `K5A` a `K5SA` |
+| `CancValue`   | Max. výše pojistného krytí (v tis.)| `enum`                 | Podmíněně| Hodnoty: 10, 50, 100. Povinné, pokud `Ticketing = A` |
+| `TourPrice`   | Cena zájezdu za osobu             | `float`                | Ne       | Max. cena za osobu (je-li více osob) |
+| `Currency`    | Měna                              | `string` (3 znaky)     | Ne       | ISO kód měny. Výchozí `CZK` |
+| `Email`       | Email klienta                     | `string` (max 64)      | Ne       | - |
+| `Ticketing`   | Prodej letenek                    | `char` (1 znak)        | Ano      | `A` - ano, `N` - ne |
+| `Status` | Příznak operace              | `enum`                 | Ano      | `K` - kalkulace,  `O` - objednávka (nezaplaceno),  `N` - objednávka s úhradou |
+| `MailToPay`   | Indikátor online platby           | `enum`                 | Podmíněně| `A` - klientovi je zaslán mail s adresou pro platbu, `N` - v odpovědi je vrácen hash pro provedení platby |
+| `MarchantUrl` | Internetová adresa obchodníka     | `string` (max 128)     | Ne       | Pokud obchodník vyžaduje úpravu kódu platební stránky |
+| `Passengers`  | Seznam osob                | `object`         | Obsahuje 1..N položek ve tvaru `Person_X` |
+
+**Objekty osob (`Passenger`) jsou prvky objektu `Passengers`**
+
+| Název pole     | Popis                               | Typ / Formát        | Příklad hodnot | Poznámka |
+|----------------|--------------------------------------|---------------------|----------------|----------|
+| `PersonId`     | Identifikátor osoby                 | `integer`           | 1              | Pořadové číslo osoby |
+| `LastName`     | Příjmení                            | `string` (max 80)   | Tester         | Uvádět bez titulů |
+| `FirstName`    | Jméno                               | `string` (max 80)   | Miroslav       | Uvádět bez titulů |
+| `BirthDate`    | Datum narození                      | `date` (`dd.mm.yyyy`)| 12.12.1960     | -        |
+| `InsProduct`   | Kód sazby                           | `string` (max 5)    | K5             | -        |
+| `CancProduct`  | Typ storna IPA                      | `enum`              | PSS0           | Pouze pro produkty IPA |
+| `InsSport`     | Připojištění rizikových sportů      | `integer` (0/1)     | 1              | Pouze IPA |
+| `InsDrink`     | Připojištění „Drink povolen“        | `integer` (0/1)     | 0              | Pouze IPA |
+| `InsWork`      | Připojištění práce a studia         | `integer` (0/1)     | 1              | Pouze IPA |
+| `InsChron`     | Chronické onemocnění                | `integer` (0/1)     | 0              | Pouze IPA |
+| `InsAuto`      | Autoasistence                       | `integer` (0/1)     | 1              | Pouze IPA |
+| `InsType`      | Typ pojištění                       | `enum`              | t              | `t` - turistická, `zs` - zimní sporty. Neuvádět u IPA |
+| `TourPrice`    | Cena zájezdu                        | `float`             | 8000           | Povinné, pokud není uvedeno v objednávce |
 
 
+#### Příklad dotazu
+```json
+{
+    "InsuranceOrder": {
+        "UserKey": "41059e28e30af11f62473ee29a93b2e1",
+        "DateFrom": "01.12.2025",
+        "DateTo": "05.12.2025",
+        "Area": "e",
+        "Email": "vir2al3vel@gmail.com",
+        "Currency": "CZK",
+        "Status": "N",
+        "Passengers": {
+            "Passanger_1": {
+                "PersonId": "1",
+                "LastName": "Tester",
+                "FirstName": "Jan",
+                "BirthDate": "01.01.1980",
+                "InsType": "t",
+                "InsProduct": "K10"
+            },
+            "Passanger_2": {
+                "PersonId": "2",
+                "LastName": "Tester",
+                "FirstName": "Ivo",
+                "BirthDate": "24.12.1960",
+                "InsType": "t",
+                "InsProduct": "K15"
+            }
+        }
+    }
+}
+```
+#### Struktura odpovědi: `InsuranceResponse`
+
+| Název pole            | Popis                                      | Typ / Formát         | Příklad hodnot     | Poznámka                 |
+|------------------------|---------------------------------------------|-----------------------|---------------------|---------------------------|
+| `OrderId`              | Číslo objednávky                           | `string`              | "250504125130"      | Identifikátor objednávky |
+| `InsId`                | Kód pojišťovny                             | `string`              | "Z"                 | Dle číselníku pojišťoven |
+| `TotalPremium`         | Celková výše pojistného                    | `float`               | 505                 | Za všechny osoby celkem  |
+| `Currency`             | Měna pojistného                            | `string` (3 znaky)    | "CZK"               | ISO 4217 kód měny         |
+| `PassengerData`        | Informace o pojištěných osobách            | `object`              | `{Person_1, ...}`   | Viz podřízená tabulka níže |
+| `ContractNo`           | Číslo smlouvy                              | `string`              | "1445389"           | Generované číslo smlouvy |
+| `AccessKey`            | Klíč pro přístup k datům                   | `string`              | "15642d5d5f6e..."   | Hash přístupového klíče  |
+| `TID`                  | Identifikátor transakce                    | `string`              | "UytreDFvbFlO..."   | Zakódovaný identifikátor |
+
+**Struktura objektu PassengerData → Person_X**
+| Název pole        | Popis                               | Typ / Formát       | Příklad hodnot | Poznámka                |
+|-------------------|--------------------------------------|---------------------|----------------|--------------------------|
+| `PersonId`        | ID osoby dle požadavku               | `string`            | "1"            | Shodné s `PersonId` v požadavku |
+| `PersonNr`        | Interní číslo osoby                  | `integer`           | 3575683        | Přiděleno pojišťovnou     |
+| `InsProduct`      | Kód pojistného produktu              | `string` (max 5)    | "K10"          | -                        |
+| `PersonPremium`   | Pojistné za osobu                    | `float`             | 250            | -                        |
+
+
+#### Příklad odpovědi
+
+```json
+{
+    "InsuranceResponse": {
+        "OrderId": "250504125130",
+        "InsId": "Z",
+        "TotalPremium": 505,
+        "Currency": "CZK",
+        "PassengerData": {
+            "Person_1": {
+                "PersonId": "1",
+                "PersonNr": 3575683,
+                "InsProduct": "K10",
+                "PersonPremium": 250
+            },
+            "Person_2": {
+                "PersonId": "2",
+                "PersonNr": 3575684,
+                "InsProduct": "K15",
+                "PersonPremium": 255
+            }
+        },
+        "ContractNo": "1445389",
+        "AccessKey": "15642d5d5f6e1a33221db40961344d95",
+        "TID": "UytreDFvbFlON09CdVpsYVhhVk0rUT09"
+    }
+}
+```
