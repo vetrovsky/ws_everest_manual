@@ -1,7 +1,43 @@
-# WS EVEREST Uživatelská příručka
+# WS EVEREST2003 – Uživatelská příručka
+
+**Verze:** 4.0  
+**Datum:** 6. května 2025  
+**Účel:** Tento dokument popisuje strukturu a použití webové služby WS EVEREST2003 pro partnery.
+
+---
+
+Všechna práva vyhrazena **TRAVEL SUPPORT SYSTEMS s.r.o.**, zapsaná u KS Brno, oddíl C, vložka 50606.  
+Tento dokument je určen **výhradně pro interní potřebu obchodních partnerů** společnosti a **nesmí být dále šířen ani zveřejněn** bez předchozího písemného souhlasu.
+
+**Kontakt:**  
+Dotazy a návrhy k implementaci služby prosím zasílejte na: [it@travspsys.cz](mailto:it@travspsys.cz)
+
+**CEO:** Luděk Miler sen.  
+📞 +420 777 941 454 (CZ)  
+📞 +421 948 941 454 (SK)
+
 
 ## Obsah
 
+- [Úvod](#ws-everest2003--uživatelská-příručka)
+- [Způsob použití služby](#způsob-použití-služby)
+- [Volání služby](#volání-služby)
+- [Typy pojištění a jejich obsah](#typy-pojištění-a-jejich-obsah)
+  - [UNIQA pojišťovna, a.s.](#uniqa-pojišťovna-as)
+  - [Individuální sazby UNIQA pojišťovna, a.s.](#individuální-sazby-uniqa-pojišťovna-as)
+  - [Generali Česká pojišťovna a.s. pojištění k letenkám](#generali-česká-pojišťovna-as-pojištění-k-letenkám)
+  - [Generali Česká pojišťovna a.s. pojištění krátkodobých pobytů](#generali-česká-pojišťovna-as-pojištění-krátkodobých-pobytů)
+  - [Generali Česká pojišťovna a.s. pojištění dlouhodobých pobytů](#generali-česká-pojišťovna-as-pojištění-dlouhodobých-pobytů)
+  - [INTER PARTNER ASSISTANCE S. A. (IPA)](#inter-partner-assistance-s-a-ipa)
+- [Popis metod](#popis-metod)
+  - [Dotaz na získání nabídky produktů](#dotaz-na-získání-nabídky-produktů-insuranceorder)
+  - [Kalkulace/Objednávka/Vytvoření pojištění pro konkrétní osoby](#kalkulaceobjednávkavytvoření-pojištění-pro-konkrétní-osoby-insuranceorder)
+  - [Aktivace objednávky](#aktivace-objednávky)
+  - [Odeslání mailu](#odeslání-mailu)
+  - [Informace o objednávce](#informace-o-objednávce)
+  - [Stornování neuhrazené objednávky](#stornování-neuhrazené-objednávky)
+  - [Nahlášení storna](#nahlášení-storna)
+- [Příloha: Seznam chybových kódů v ErrorResponse](#příloha-seznam-chybových-kódů-v-errorresponse)
 
 ## Způsob použití služby:
 
@@ -139,7 +175,7 @@ Na základě smlouvy s pojišťovnou je provozovatelem zpřístupněné produkty
 
 - Způsob zadávání produktů:
    
-  | Zkratka              | InsProduct | CancProduct | Poznámka                                                       |
+| Zkratka              | InsProduct | CancProduct | Poznámka                                                       |
 |----------------------|------------|-------------|----------------------------------------------------------------|
 | Rozsah09             | Rozsah09   | -           | Storno letenky 10.000 Kč, SÚ 0 %                               |
 | Rozsah10             | Rozsah10   | -           | Storno letenky 50.000 Kč, SÚ 0 %                               |
@@ -336,8 +372,9 @@ Struktura objektu `Product_X` (např. `Product_1`)
                 "Currency": "CZK",
                 "Description": "Komplet se stornem turs individuál 2019 UNIQA",
                 "InsId": "S"
-            },
-...
+            }
+        }
+    }
 ```
 
 ### Kalkulace/Objednávka/Vytvoření pojištění pro konkrétní osoby (`[InsuranceOrder]`)
@@ -367,21 +404,22 @@ Struktura objektu `Product_X` (např. `Product_1`)
 
 **Objekty osob (`Passenger`) jsou prvky objektu `Passengers`**
 
-| Název pole     | Popis                               | Typ / Formát        | Příklad hodnot | Poznámka |
-|----------------|--------------------------------------|---------------------|----------------|----------|
-| `PersonId`     | Identifikátor osoby                 | `integer`           | 1              | Pořadové číslo osoby |
-| `LastName`     | Příjmení                            | `string` (max 80)   | Tester         | Uvádět bez titulů |
-| `FirstName`    | Jméno                               | `string` (max 80)   | Miroslav       | Uvádět bez titulů |
-| `BirthDate`    | Datum narození                      | `date` (`dd.mm.yyyy`)| 12.12.1960     | -        |
-| `InsProduct`   | Kód sazby                           | `string` (max 5)    | K5             | -        |
-| `CancProduct`  | Typ storna IPA                      | `enum`              | PSS0           | Pouze pro produkty IPA |
-| `InsSport`     | Připojištění rizikových sportů      | `integer` (0/1)     | 1              | Pouze IPA |
-| `InsDrink`     | Připojištění „Drink povolen“        | `integer` (0/1)     | 0              | Pouze IPA |
-| `InsWork`      | Připojištění práce a studia         | `integer` (0/1)     | 1              | Pouze IPA |
-| `InsChron`     | Chronické onemocnění                | `integer` (0/1)     | 0              | Pouze IPA |
-| `InsAuto`      | Autoasistence                       | `integer` (0/1)     | 1              | Pouze IPA |
-| `InsType`      | Typ pojištění                       | `enum`              | t              | `t` - turistická, `zs` - zimní sporty. Neuvádět u IPA |
-| `TourPrice`    | Cena zájezdu                        | `float`             | 8000           | Povinné, pokud není uvedeno v objednávce |
+| Název pole    | Popis                          | Typ / Formát          | Povinné | Poznámka                                              |
+| ------------- | ------------------------------ | --------------------- | ------- | ----------------------------------------------------- |
+| `PersonId`    | Identifikátor osoby            | `integer`             | Ano     | Pořadové číslo osoby                                  |
+| `LastName`    | Příjmení                       | `string` (max 80)     | Ano     | Uvádět bez titulů                                     |
+| `FirstName`   | Jméno                          | `string` (max 80)     | Ano     | Uvádět bez titulů                                     |
+| `BirthDate`   | Datum narození                 | `date` (`dd.mm.yyyy`) | Ano     | -                                                     |
+| `InsProduct`  | Kód sazby                      | `string` (max 5)      | Ano     | -                                                     |
+| `CancProduct` | Typ storna IPA                 | `enum`                | Ne      | Pouze pro produkty IPA                                |
+| `InsSport`    | Připojištění rizikových sportů | `integer` (0/1)       | Ne      | Pouze IPA                                             |
+| `InsDrink`    | Připojištění „Drink povolen“   | `integer` (0/1)       | Ne      | Pouze IPA                                             |
+| `InsWork`     | Připojištění práce a studia    | `integer` (0/1)       | Ne      | Pouze IPA                                             |
+| `InsChron`    | Chronické onemocnění           | `integer` (0/1)       | Ne      | Pouze IPA                                             |
+| `InsAuto`     | Autoasistence                  | `integer` (0/1)       | Ne      | Pouze IPA                                             |
+| `InsType`     | Typ pojištění                  | `enum`                | Ne      | `t` - turistická, `zs` - zimní sporty. Neuvádět u IPA |
+| `TourPrice`   | Cena zájezdu                   | `float`               | Ano\*   | Povinné, pokud není uvedeno v objednávce              |
+
 
 
 #### Příklad dotazu
@@ -418,24 +456,25 @@ Struktura objektu `Product_X` (např. `Product_1`)
 ```
 #### Struktura odpovědi: `InsuranceResponse`
 
-| Název pole            | Popis                                      | Typ / Formát         | Příklad hodnot     | Poznámka                 |
-|------------------------|---------------------------------------------|-----------------------|---------------------|---------------------------|
-| `OrderId`              | Číslo objednávky                           | `string`              | "250504125130"      | Identifikátor objednávky |
-| `InsId`                | Kód pojišťovny                             | `string`              | "Z"                 | Dle číselníku pojišťoven |
-| `TotalPremium`         | Celková výše pojistného                    | `float`               | 505                 | Za všechny osoby celkem  |
-| `Currency`             | Měna pojistného                            | `string` (3 znaky)    | "CZK"               | ISO 4217 kód měny         |
-| `PassengerData`        | Informace o pojištěných osobách            | `object`              | `{Person_1, ...}`   | Viz podřízená tabulka níže |
-| `ContractNo`           | Číslo smlouvy                              | `string`              | "1445389"           | Generované číslo smlouvy |
-| `AccessKey`            | Klíč pro přístup k datům                   | `string`              | "15642d5d5f6e..."   | Hash přístupového klíče  |
-| `TID`                  | Identifikátor transakce                    | `string`              | "UytreDFvbFlO..."   | Zakódovaný identifikátor |
+| Název pole      | Popis                           | Typ / Formát       | Poznámka                   |
+| --------------- | ------------------------------- | ------------------ | -------------------------- |
+| `OrderId`       | Číslo objednávky                | `string`           | Identifikátor objednávky   |
+| `InsId`         | Kód pojišťovny                  | `string`           | Dle číselníku pojišťoven   |
+| `TotalPremium`  | Celková výše pojistného         | `float`            | Za všechny osoby celkem    |
+| `Currency`      | Měna pojistného                 | `string` (3 znaky) | ISO 4217 kód měny          |
+| `PassengerData` | Informace o pojištěných osobách | `object`           | Viz podřízená tabulka níže |
+| `ContractNo`    | Číslo smlouvy                   | `string`           | Generované číslo smlouvy   |
+| `AccessKey`     | Klíč pro přístup k datům        | `string`           | Hash přístupového klíče    |
+| `TID`           | Token pro přístup k dokumentům obch.případu| `string`|    |
+
 
 **Struktura objektu PassengerData → Person_X**
-| Název pole        | Popis                               | Typ / Formát       | Příklad hodnot | Poznámka                |
-|-------------------|--------------------------------------|---------------------|----------------|--------------------------|
-| `PersonId`        | ID osoby dle požadavku               | `string`            | "1"            | Shodné s `PersonId` v požadavku |
-| `PersonNr`        | Interní číslo osoby                  | `integer`           | 3575683        | Přiděleno pojišťovnou     |
-| `InsProduct`      | Kód pojistného produktu              | `string` (max 5)    | "K10"          | -                        |
-| `PersonPremium`   | Pojistné za osobu                    | `float`             | 250            | -                        |
+| Název pole      | Popis                   | Typ / Formát     | Poznámka                        |
+| --------------- | ----------------------- | ---------------- | ------------------------------- |
+| `PersonId`      | ID osoby dle požadavku  | `string`         | Shodné s `PersonId` v požadavku |
+| `PersonNr`      | Interní číslo osoby     | `integer`        | Přiděleno pojišťovnou           |
+| `InsProduct`    | Kód pojistného produktu | `string` (max 5) | -                               |
+| `PersonPremium` | Pojistné za osobu       | `float`          | -                               |
 
 
 #### Příklad odpovědi
@@ -464,6 +503,312 @@ Struktura objektu `Product_X` (např. `Product_1`)
         "ContractNo": "1445389",
         "AccessKey": "15642d5d5f6e1a33221db40961344d95",
         "TID": "UytreDFvbFlON09CdVpsYVhhVk0rUT09"
+    }
+}
+```
+
+### Aktivace objednávky
+
+Vytvořenou neuhrazenou objednávku se stavu **O** je možné nastavit do uhrazeného stavu **N** metodou `PaymentConfirmation`.
+
+#### Definice parametrů metody `PaymentConfirmation`
+
+| Název pole    | Popis                                      | Typ / Formát      | Povinné | 
+|---------------|---------------------------------------------|--------------------|-----------------------------|
+| `UserKey`     | Identifikátor prodejce                     | `string` (max 64)  | ano                           | 
+| `AccessKey`   | Přístupový kód                             | `string` (max 64)  | ano                          | 
+| `OrderId`     | Číslo objednávky                           | `string` (max 30)  | Podmíněně*                           |
+| `ContractNo`  | Číslo smlouvy/návrhu                       | `string` (max 10)  | Podmíněně*                            | 
+
+V metodě je povinné některé z polí `OrderId` nebo  `ContractNo`
+
+#### Příklad dotazu
+
+```json
+{
+    "PaymentConfirmation": {
+        "OrderId": "123",
+        "UserKey": "41059e28e30af11f62473ee29a93b2e1",
+        "AccessKey": "33359e28e30af11f62473ee29a93b2e1"
+    }
+}
+```
+#### Struktura odpovědi: `PaymentConfirmationResponse`
+
+| Název pole | Popis            | Typ / Formát      |
+| ---------- | ---------------- | ----------------- |
+| `OrderId`  | Číslo objednávky | `string` (max 30) |
+
+Contracts (obsahuje 1..N prvků Contract_XXXX)
+
+| Název pole     | Popis                | Typ / Formát       |
+| -------------- | -------------------- | ------------------ |
+| `AccessKey`    | Přístupový kód       | `string` (max 64)  |
+| `ContractNo`   | Číslo smlouvy/návrhu | `string` (max 10)  |
+| `InsId`        | Kód pojišťovny       | `enum`             |
+| `TotalPremium` | Celkové pojistné     | `float`            |
+| `Currency`     | Měna (ISO kód)       | `string` (3 znaky) |
+| `Status`       | Stav smlouvy         | `enum`             |
+
+Passengers (každá smlouva obsahuje 1..N prvků Person_XX)
+
+| Název pole      | Popis                               | Typ / Formát     |
+| --------------- | ----------------------------------- | ---------------- |
+| `PersonId`      | Identifikátor osoby                 | `integer`        |
+| `PersonNr`      | Číslo záznamu osoby u provozovatele | `integer`        |
+| `InsProduct`    | Kód sazby                           | `string` (max 6) |
+| `PersonPremium` | Pojistné za osobu                   | `float`          |
+
+#### Příklad odpovědi
+
+```json
+{
+    "PaymentConfirmationResponse": {
+        "OrderId": "250505192434",
+        "Contracts": {
+            "Contract_1445503": {
+                "ContractNo": "1445503",
+                "InsId": "Z",
+                "TotalPremium": 505,
+                "Currency": "CZK",
+                "Status": "N",
+                "Passengers": {
+                    "Passenger_1": {
+                        "PersonId": "1",
+                        "PersonNr": "3576020",
+                        "Status": "O"
+                    },
+                    "Passenger_2": {
+                        "PersonId": "2",
+                        "PersonNr": "3576021",
+                        "Status": "O"
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+### Odeslání mailu
+
+Klientovi je možné zaslat návrh pojištění pomocí metody `SendEmail`
+
+#### Definice parametrů metody `SendEmail`
+| Název pole   | Popis                  | Typ / Formát      | Povinné     |
+| ------------ | ---------------------- | ----------------- | ----------- |
+| `UserKey`    | Identifikátor prodejce | `string` (max 64) | ano         |
+| `AccessKey`  | Přístupový kód         | `string` (max 64) | ano         |
+| `OrderId`    | Číslo objednávky       | `string` (max 30) | Podmíněně\* |
+| `ContractNo` | Číslo smlouvy/návrhu   | `string` (max 10) | Podmíněně\* |
+| `Email`      | Email příjemce         | `string` (max 64) | ne (odesání na email z objednávky)|
+
+V metodě je povinné některé z polí `OrderId` nebo  `ContractNo`
+
+#### Příklad dotazu
+
+```json
+{
+    "SendEmail": {
+        "ContractNo": "1445503",
+        "UserKey": "41059e28e30af11f62473ee29a93b2e1",
+        "AccessKey": "eb888cdbed26cf4c78a25aa2fa861166",
+        "Email": "vir2al3vel@gmail.com"
+    }
+}
+
+```
+
+#### Struktura odpovědi `SendEmailResponse`:
+
+| Název pole   | Popis                | Typ / Formát      |
+| ------------ | -------------------- | ----------------- |
+| `OrderId`  | Číslo objednávky | `string` (max 30) |
+| `ContractNo` | Číslo smlouvy/návrhu | `string` (max 10) |
+| `Status`     | Stav smlouvy         | `enum`            |
+| `Email`      | Email příjemce       | `string` (max 64) |
+
+
+#### Příklad odpovědi
+
+```json
+{
+    "SendEmailResponse": {
+        "ContractNo": "1445503",
+        "OrderId": "250505192434",
+        "Status": "N",
+        "Email": "vir2al3vel@gmail.com"
+    }
+}
+
+```
+
+### Informace o objednávce
+
+Ziskání podrobných informací o stavu návrhu pomocí metody `OrderInfo`
+
+#### Definice parametrů metody `OrderInfo`
+| Název pole    | Popis                                      | Typ / Formát      | Povinné | 
+|---------------|---------------------------------------------|--------------------|-----------------------------|
+| `UserKey`     | Identifikátor prodejce                     | `string` (max 64)  | ano                           | 
+| `AccessKey`   | Přístupový kód                             | `string` (max 64)  | ano                          | 
+| `OrderId`     | Číslo objednávky                           | `string` (max 30)  | Podmíněně*                           |
+| `ContractNo`  | Číslo smlouvy/návrhu                       | `string` (max 10)  | Podmíněně*                            | 
+
+V metodě je povinné některé z polí `OrderId` nebo  `ContractNo`
+
+#### Příklad dotazu
+
+```json
+{
+    "OrderInfo": {
+      "UserKey": "41059e28e30af11f62473ee29a93b2e1",
+      "AccessKey": "eb888cdbed26cf4c78a25aa2fa861166",
+      "ContractNo": "1445503"
+    }
+}
+
+```
+
+#### Struktura odpovědi `InfoResponse`:
+
+| Název pole | Popis            | Typ / Formát      | Použití          |
+| ---------- | ---------------- | ----------------- | ---------------- |
+| `OrderId`  | Číslo objednávky | `string` (max 30) | Objednávkový kód |
+
+**Contracts – Smlouvy / návrhy (1..N prvků Contract_XXXX)**
+
+| Název pole     | Popis                                    | Typ / Formát        |
+|----------------|-------------------------------------------|---------------------|
+| `ContractNo`   | Číslo smlouvy/návrhu                      | `string` (max 10)   |
+| `AccessKey`    | Přístupový kód (autorizace objednávky)   | `string` (max 64)   |
+| `TID`          | Token pro přístup k dokumentům obch.případu| `string` (max 64)   |
+| `DateFrom`     | Počátek pojištění                        | `date` (dd.mm.yyyy) |
+| `DateTo`       | Konec cesty                              | `date` (dd.mm.yyyy) |
+| `NumPerson`    | Počet osob                               | `int`               |
+| `Area`         | Riziková oblast *(E – Evropa, W – Svět)* | `enum`              |
+| `Country`      | Cílová země                              | `string`            |
+| `CountryISO`   | Cílová země (ISO 3166-1 alpha-3)         | `string` (3 znaky)  |
+| `InsId`        | Kód pojišťovny                           | `enum`              |
+| `TotalPremium` | Celkové pojistné                         | `float`             |
+| `Currency`     | Měna (ISO kód, např. CZK)                | `string` (3 znaky)  |
+| `Status`       | Stav záznamu: `O`, `N`, `X`              | `enum`              |
+| `Email`        | Email klienta                            | `string` (max 64)   |
+| `InsertTime`   | Datum vložení záznamu                    | `timestamp`         |
+| `PaymentTime`  | Datum platby (aktivace)                  | `timestamp`         |
+
+**Passengers – Osoby (1..N prvků Person_XX)**
+
+| Název pole         | Popis                                          | Typ / Formát        | Poznámka             |
+| ------------------ | ---------------------------------------------- | ------------------- | -------------------- |
+| `PersonId`         | Identifikátor osoby                            | `int`               |                      |
+| `LastName`         | Příjmení                                       | `string` (max 80)   | bez titulů    |
+| `FirstName`        | Jméno                                          | `string` (max 80)   | bez titulů    |
+| `BirthDate`        | Datum narození                                 | `date` (dd.mm.yyyy) |                      |
+| `InsProduct`       | Kód sazby                                      | `string` (max 5)    |                      |
+| `InsType`          | Typ pojištění (`t` – turistická, `zs` – zimní) | `enum`              |                      |
+| `CancProduct`      | Typ storna                                     | `enum`              | pouze IPA            |
+| `InsSport`     | Připojištění rizikových sportů      | `integer` (0/1)     | 1              | Pouze IPA |
+| `InsDrink`     | Připojištění „Drink povolen“        | `integer` (0/1)     | 0              | Pouze IPA |
+| `InsWork`      | Připojištění práce a studia         | `integer` (0/1)     | 1              | Pouze IPA |
+| `InsChron`     | Chronické onemocnění                | `integer` (0/1)     | 0              | Pouze IPA |
+| `InsAuto`      | Autoasistence                       | `integer` (0/1)     | 1              | Pouze IPA |
+| `TourPrice`    | Cena zájezdu                        | `float`             | 8000           | Povinné, pokud není uvedeno v objednávce |
+
+#### Příklad odpovědi
+
+```json
+{
+    "InfoResponse": {
+        "OrderId": "",
+        "Contracts": {
+            "Contract_1445503": {
+                "ContractNo": "1445503",
+                "AccessKey": "eb888cdbed26cf4c78a25aa2fa861166",
+                "TID": "RHUwYVpWalZ5SDl3M0d4KytieURZUT09",
+                "DateFrom": "01.12.2025",
+                "DateTo": "05.12.2025",
+                "NumPerson": 2,
+                "Area": "Evropa",
+                "Country": "",
+                "CountryISO": "",
+                "InsId": "Z",
+                "TotalPremium": 505,
+                "Currency": "CZK",
+                "Status": "N",
+                "Email": "vir2al3vel@gmail.com",
+                "InsertTime": "05.05.2025 19:24",
+                "PaymentTime": "05.05.2025 19:25",
+                "Passengers": {
+                    "Passenger_1": {
+                        "PersonId": "1",
+                        "PersonNr": "3576020",
+                        "LastName": "TESTER",
+                        "FirstName": "LUDEK",
+                        "BirthDate": "01.01.1980",
+                        "InsProduct": "nK10",
+                        "InsType": "t",
+                        "PersonPremium": "250"
+                    },
+                    "Passenger_2": {
+                        "PersonId": "2",
+                        "PersonNr": "3576021",
+                        "LastName": "TESTER",
+                        "FirstName": "ROMAN",
+                        "BirthDate": "24.12.1960",
+                        "InsProduct": "nK15",
+                        "InsType": "t",
+                        "PersonPremium": "255"
+                    }
+                },
+                "Documents": {
+                    "Document_1": {
+                        "Name": "Asistenční kartičky",
+                        "Url": "https://www.everest2003.cz/modules.php?format=karta&name=Prehled_potvrzeni&tid=RHUwYVpWalZ5SDl3M0d4KytieURZUT09"
+                    },
+                    "Document_2": {
+                        "Name": "Potvrzení o sjednaném pojištění",
+                        "Url": "https://www.everest2003.cz/modules.php?format=pdf&name=Prehled_potvrzeni&tid=RHUwYVpWalZ5SDl3M0d4KytieURZUT09"
+                    },
+                    "Document_3": {
+                        "Name": "Potvrzení o rozsahu pojistného krytí v angličtině",
+                        "Url": "https://www.everest2003.cz/modules.php?format=info&name=Prehled_potvrzeni&tid=RHUwYVpWalZ5SDl3M0d4KytieURZUT09"
+                    },
+                    "Document_4": {
+                        "Name": "Všeobecné pojistné podmínky UCZ/Ces/20",
+                        "Url": "https://www.travsupsys.cz/download/EU_53611E_Ces20.pdf"
+                    },
+                    "Document_5": {
+                        "Name": "Doplňkové pojistné podmínky DPP/Ces/A/20",
+                        "Url": "https://www.travsupsys.cz/download/EU_53621E_Dpp_A20.pdf"
+                    },
+                    "Document_6": {
+                        "Name": "Informační dokument k cestovnímu pojištění",
+                        "Url": "https://www.travsupsys.cz/download/UNIQA_IPID_UCZ_CP.pdf"
+                    },
+                    "Document_7": {
+                        "Name": "Zpracování osobních údajů, informace a souhlasy správce",
+                        "Url": "https://www.travsupsys.cz/download/info_gdpr_uniqa.pdf"
+                    },
+                    "Document_8": {
+                        "Name": "Formulář pro hlášení škody storna zájezdu",
+                        "Url": "https://www.travsupsys.cz/download/PU_Uniqa_ST.pdf"
+                    },
+                    "Document_9": {
+                        "Name": "Formulář pro hlášení škody z léčebných výloh, odpovědnosti a zavazadel",
+                        "Url": "https://www.travsupsys.cz/download/PU_Uniqa_CP.pdf"
+                    },
+                    "Document_10": {
+                        "Name": "Formulář pro hlášení škody z úrazového pojištění",
+                        "Url": "https://www.travsupsys.cz/download/PU_Uniqa_UP.pdf"
+                    },
+                    "Document_11": {
+                        "Name": "Pokyny pro hlášení pojistné události ON-LINE",
+                        "Url": "https://www.travsupsys.cz/download/PU_Uniqa_pokyny.pdf"
+                    }
+                }
+            }
+        }
     }
 }
 ```
@@ -544,9 +889,9 @@ Pro zrušení objednávky je určena metoda `OrderDelete`.
 }
 ```
 
-### Definice metody pro nahlášení strorna
+### Definice metody pro nahlášení storna
 
-Nahlášení storna zájezdu/služby včetně detailního vyúčtování je určena TripCancellation
+Nahlášení storna zájezdu/služby včetně detailního vyúčtování je určena `TripCancellation`
 
 | Název pole                       | Popis                                                   | Typ / Formát        | Povinné |
 | -------------------------------- | ------------------------------------------------------- | ------------------- | ------- |
@@ -567,3 +912,75 @@ Nahlášení storna zájezdu/služby včetně detailního vyúčtování je urč
 | `Billing.RefundDate`             | Datum výplaty zákazníkovi                               | `date` (DD.MM.YYYY) | Ano     |
 | `Billing.InsuredCosts`           | Výše škody z pojistné události                          | `float`             | Ano     |
 | `Notes`                          | Poznámka CK                                             | `string`            | Ne      |
+
+#### Příklad dotazu 
+```json
+{
+    "TripCancellation": {
+        "UserKey": "41059e28e30af11f62473ee29a93b2e1",
+        "AccessKey": "de7d480048cd1f1d615231fd053357f3",
+        "Organizer": "České Kormidlo TEST",
+        "OrderId": "241209121836",
+        "DateFrom": "01.07.2024",
+        "DateTo": "15.07.2024",
+        "DestinationType": "Evropa/pobytový",
+        "Billing": {
+            "Price": 2500,
+            "PaidByCustomer": 2000,
+            "LastPaymentDate": "15.05.2024",
+            "CancellationReportDate": "10.06.2024",
+            "CancellationPrice": 1800,
+            "CancellationFeeClaimed": 300,
+            "RefundToCustomer": 1500,
+            "RefundDate": "15.06.2024",
+            "InsuredCosts": 1200
+        },
+        "Notes": "Customer cancelled due to health issues."
+    }
+}
+```
+#### Struktura odpovědi: `TripCancellationResponse`
+
+| Název pole | Popis                                     | Typ / Formát   | 
+| ---------- | ----------------------------------------- | -------------- | 
+| `FormUrl`  | URL adresa formuláře pro doplnění         | `string (URL)` |
+| `FormFile` | URL ke stažení PDF formuláře              | `string (URL)` |
+| `Status`   | Stav požadavku: `OK` nebo `ErrorResponse` | `string`       |
+
+#### Příklad odpověďi
+
+```json
+{
+    "TripCancellationResponse": {
+        "FormUrl": "https://www.everest2003.cz/modules.php?name=Vyucto_storna&hash=L093OWNBY0FUM3lMd0hVQW5iMTlOdz09&id=4336",
+        "FormFile": "https://www.everest2003.cz/modules.php?name=Vyucto_storna&file=download&hash=L093OWNBY0FUM3lMd0hVQW5iMTlOdz09&id=4336",
+        "Status": "OK"
+    }
+}
+```
+
+### Příloha: Seznam chybových kódu v ErrorResponse
+
+| Číslo chyby | Popis chyby                                  | Význam                                                                                      |
+| ----------- | -------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| 1           | Unknown Status.                              | Neznámý status.                                                                             |
+| 2           | UserKey error.                               | Chyba v UserKey.                                                                            |
+| 3           | DateFrom error.                              | Chyba v DateFrom.                                                                           |
+| 4           | DateTo error.                                | Chyba v DateTo.                                                                             |
+| 5           | Unknown InsId.                               | Neznámý InsId.                                                                              |
+| 6           | Area error.                                  | Chyba v Area.                                                                               |
+| 7           | Passenger X. name missing.                   | Chybí jméno X-té osoby.                                                                     |
+| 8           | Passengers count does not match NumPerson.   | Počet cestujících neodpovídá NumPerson.                                                     |
+| 9           | Number of passengers not allowed.            | Počet cestujících překročen.                                                                |
+| 10          | Database not connected.                      | Databáze není připojena. Opakujte volání.                                                   |
+| 11          | Failed loading XML + podrobnější popis chyby | Nepodařilo se načíst XML + podrobnější popis chyby                                          |
+| 12          | Error decoding json.                         | Chyba dekódování JSON.                                                                      |
+| 13          | No insurance products for this criteria.     | Žádné pojistné produkty neodpovídají kritériím.                                             |
+| 14          | InsProduct for person No.X not valid.        | InsProduct za osobu X není platný.                                                          |
+| 15          | Missing TourPrice for person No.X            | Chybějící TourPrice na osobu X                                                              |
+| 17          | Creditalials not valid.                      | Creditalials není platný. Uživatel s UserKey nemá přístup k WS Everest                      |
+| 18          | Unknown user. Authorization failed.          | Neznámý uživatel. Autorizace se nezdařila. Nesprávný UserKey.                               |
+| 19          | 0 rows affected.                             | 0 řádků ovlivněno. Operaci nelze provést, zkontrolujte stav objednávky pomocí OrderInfo.    |
+| 20          | Accesskey not correct.                       | Accesskey není správné.                                                                     |
+| 21          | Email not sent. Missing email address.       | Email není odeslán. Chybí e-mailová adresa.                                                 |
+| 22          | Not recognised operation (root element).     | Nerozpoznána operace (neznámý root element). Také je vypisována při nesprávné syntaxi JSON. |
