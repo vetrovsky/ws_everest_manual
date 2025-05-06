@@ -467,3 +467,103 @@ Struktura objektu `Product_X` (např. `Product_1`)
     }
 }
 ```
+
+### Stornování neuhrazené objednávky 
+
+Pro zrušení objednávky je určena metoda `OrderDelete`.
+
+#### Definice parametrů metody:
+
+### Definice metody pro výmaz záznamu
+
+| Název pole    | Popis                                                      | Typ / Formát       | Povinné |
+|---------------|-------------------------------------------------------------|--------------------|---------|
+| `UserKey`     | Identifikátor prodejce (autorizace dotazu)                 | `string` (max 64)  | Ano     |
+| `AccessKey`   | Přístupový kód (autorizace objednávky)                     | `string` (max 64)  | Ano     |
+| `OrderId`     | Číslo objednávky                                            | `string` (max 30)  | Ano*    |
+| `ContractNo`  | Číslo smlouvy/návrhu                                        | `string` (max 10)  | Ano*    |
+| `PersonNr`    | Číslo záznamu osoby (smaže pouze konkrétní osobu, pokud uvedeno) | `int`         | Ne      |
+
+#### Příklad dotazu 
+
+```json
+{
+    "OrderDelete": {
+        "ContractNo": "1445528",
+        "UserKey": "41059e28e30af11f62473ee29a93b2e1",
+        "AccessKey": "dd4831ff93f99ef561f28acb28fb2e5a"
+    }
+}
+```
+
+#### Struktura odpovědi: `OrderDeleteResponse`
+
+| Název pole     | Popis               | Typ / Formát       | Povinné |
+|----------------|---------------------|---------------------|----------|
+| `OrderId`      | Číslo objednávky     | `string` (max 30)   | Ano      |
+
+**Objekt `Contracts` (může obsahovat více prvků `Contract_XXXX`)**
+
+| Název pole       | Popis                        | Typ / Formát       | 
+|------------------|-------------------------------|---------------------|
+| `ContractNo`     | Číslo smlouvy/návrhu          | `string` (max 10)   |
+| `TotalPremium`   | Celkové pojistné              | `float`             |
+| `Currency`       | Měna (ISO kód, např. CZK)     | `string` (3 znaky)  |
+| `Status`         | Stav záznamu (`X` = Stornováno)| `enum`              |
+
+**Objekt `DeletedPassengers`**
+
+| Název pole     | Popis                   | Typ / Formát       | 
+|----------------|--------------------------|---------------------|
+| `PersonId`     | Identifikátor osoby      | `string` nebo `int` |
+| `PersonNr`     | Číslo záznamu osoby      | `string` nebo `int` |
+| `Status`       | Stav osoby (`X` = smazáno)| `enum`              |
+
+#### Příklad odpovědi 
+
+```json
+{
+    "OrderDeleteResponse": {
+        "OrderId": "",
+        "Contracts": {
+            "Contract_1445528": {
+                "ContractNo": "1445528",
+                "TotalPremium": 0,
+                "Currency": "CZK",
+                "Status": "X",
+                "DeletedPassengers": {
+                    "Passenger_1": {
+                        "PersonId": "1",
+                        "PersonNr": "3576100",
+                        "Status": "X"
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+### Definice metody pro nahlášení strorna
+
+Nahlášení storna zájezdu/služby včetně detailního vyúčtování je určena TripCancellation
+
+| Název pole                       | Popis                                                   | Typ / Formát        | Povinné |
+| -------------------------------- | ------------------------------------------------------- | ------------------- | ------- |
+| `UserKey`                        | Identifikátor prodejce                                  | `string` (max 64)   | Ano     |
+| `AccessKey`                      | Přístupový kód                                          | `string` (max 64)   | Ano     |
+| `Organizer`                      | Pořadatel zájezdu / prodejce stornovaných služeb        | `string`            | Ano     |
+| `OrderId`                        | Identifikátor zájezdu/služby                            | `string`            | Ano     |
+| `DateFrom`                       | Termín zahájení                                         | `date` (DD.MM.YYYY) | Ano     |
+| `DateTo`                         | Termín ukončení                                         | `date` (DD.MM.YYYY) | Ano     |
+| `DestinationType`                | Druh zájezdu nebo služby (např. Evropa/pobytový)        | `string`            | Ano     |
+| `Billing.Price`                  | Cena zájezdu dle smlouvy (bez pojištění)                | `float`             | Ano     |
+| `Billing.PaidByCustomer`         | Uhrazeno zákazníkem (bez pojištění)                     | `float`             | Ano     |
+| `Billing.LastPaymentDate`        | Datum poslední nebo jednorázové úhrady                  | `date` (DD.MM.YYYY) | Ano     |
+| `Billing.CancellationReportDate` | Datum nahlášení storna od zákazníka                     | `date` (DD.MM.YYYY) | Ano     |
+| `Billing.CancellationPrice`      | Cena služeb za osoby uplatňující storno (bez pojištění) | `float`             | Ano     |
+| `Billing.CancellationFeeClaimed` | Nárokované stornopoplatky CK/CA                         | `float`             | Ano     |
+| `Billing.RefundToCustomer`       | Částka vrácená zákazníkovi                              | `float`             | Ano     |
+| `Billing.RefundDate`             | Datum výplaty zákazníkovi                               | `date` (DD.MM.YYYY) | Ano     |
+| `Billing.InsuredCosts`           | Výše škody z pojistné události                          | `float`             | Ano     |
+| `Notes`                          | Poznámka CK                                             | `string`            | Ne      |
