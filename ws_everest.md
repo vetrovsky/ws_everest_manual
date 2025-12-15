@@ -1,7 +1,7 @@
 # WS EVEREST2003 – Uživatelská příručka
 
-**Verze:** 4.0  
-**Datum:** 6. května 2025  
+**Verze:** 5.0  
+**Datum:** 15. prosince 2025  
 **Účel:** Tento dokument popisuje strukturu a použití webové služby WS EVEREST2003 pro partnery.
 
 ---
