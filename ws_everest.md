@@ -84,10 +84,10 @@ volání v xml syntaxi:
 3. Názvy všech elementů jsou závislé na velikosti písmen (case sensitive). Číselné hodnoty v desetinném tvaru se zadávají s desetinnou tečkou (např. 1234.56). Všechny hodnoty musí být v uvozovkách. Kódování je UTF-8. 
 4. Všechny metody v případě chyby nebo nesprávně zadaných budou vracet **ErrorResponse**. V případě úspěšného zpracování bude vrácen **Response** ve formátu, jak je popsáno v časti popis metod. Formát **ErrorResponse**:
 
-| Jméno pole  | Popis pole    | Typ/délka znaků | Použití | Příklad hodnot          |
-|-------------|---------------|-----------------|---------|-------------------------|
-| ErrorNo     | Číslo chyby   | int             |         | 13                      |
-| ErrorDesc   | Popis chyby   | char/255        |         | "Missing birth date"    |
+| Jméno pole | Popis pole  | Typ/délka znaků | Příklad hodnot      |
+|------------|-------------|-----------------|---------------------|
+| ErrorNo    | Číslo chyby | int             | 13                  |
+| ErrorDesc  | Popis chyby | char/255        | "Missing birth date" |
 
 5.	Interaktivní tester naleznete na https://ws.everest2003.cz/tester.php
 
@@ -110,7 +110,7 @@ Na základě smlouvy s pojišťovnou je provozovatelem zpřístupněné produkty
 - Typ pojištění **InsType**:
   - t, zs
 - Identifikátory pojištění **InsProduct**: 
-  - K5, K5S, K10, K10S, K15, K15S, D5S, STS, K5A, K5SA, K5R, K10R, K15R
+  - K12, K12S, K16, K16S, K20, K20S, D12S, STS, K12A, K12SA, K12R, K16R, K20R, 
 - Area
   - E,W
 
@@ -119,18 +119,31 @@ Na základě smlouvy s pojišťovnou je provozovatelem zpřístupněné produkty
 
 - Způsob zadávání produktů 
 
-| Zkratka | InsProdukt | InsType | Poznámka                                           |
-|---------|------------|---------|----------------------------------------------------|
-| nD5S    | D5S        | t       | pouze ČR, turs, se stornem                         |
-| nD5S+   | D5S        | zs      | pouze ČR, zimní, se stornem                        |
-| nK5     | K5         | t       | Evropa/svět, turs, bez storna                      |
-| nK5+    | K5         | zs      | Evropa/svět, zimní, bez storna                     |
-| nK10    | K10        | t       | Evropa/svět, exclusiv turs, bez storna             |
-| nK10+   | K10        | zs      | Evropa/svět, exclusiv zimní, bez storna            |
-| nK15    | K15        | t       | Evropa/svět, exclusiv turs, bez storna             |
-| nK15+   | K15        | zs      | Evropa/svět, exclusiv zimní, bez storna            |
+| Zkratka | InsProduct | InsType | Poznámka                                                      |
+|---------|------------|---------|---------------------------------------------------------------|
+| D12S    | D12S       | t       | pouze ČR, turs, se stornem                                    |
+| D12S+   | D12S       | zs      | pouze ČR, zimní, se stornem                                   |
+| K12     | K12        | t       | Evropa/svět, turs, bez storna                                 |
+| K12+    | K12        | zs      | Evropa/svět, zimní, bez storna                                |
+| K12S    | K12S       | t       | Evropa/svět, turs, se stornem                                 |
+| K12S+   | K12S       | zs      | Evropa/svět, zimní, se stornem                                |
+| K16     | K16        | t       | Evropa/svět, exclusiv turs, bez storna                        |
+| K16+    | K16        | zs      | Evropa/svět, exclusiv zimní, bez storna                       |
+| K16S    | K16S       | t       | Evropa/svět, exclusiv turs, se stornem                        |
+| K16S+   | K16S       | zs      | Evropa/svět, exclusiv zimní, se stornem                       |
+| K20     | K20        | t       | Evropa/svět, exclusiv turs, bez storna                        |
+| K20+    | K20        | zs      | Evropa/svět, exclusiv zimní, bez storna                       |
+| K20S    | K20S       | t       | Evropa/svět, exclusiv turs, se stornem                        |
+| K20S+   | K20S       | zs      | Evropa/svět, exclusiv zimní, se stornem                       |
+| K12A    | K12A       | t       | Evropa, osádka+asistence k vozidlu turs, bez storna           |
+| K12A+   | K12A       | zs      | Evropa, osádka+asistence k vozidlu zimní, bez storna          |
+| K12SA   | K12SA      | t       | Evropa, osádka+asistence k vozidlu turs, se stornem           |
+| K12SA+  | K12SA      | zs      | Evropa, osádka+asistence k vozidlu zimní, se stornem          |
+| K12R+   | K12R       | zs      | Evropa, roční pojištění pro opakované cesty                   |
+| K16R+   | K16R       | zs      | Evropa/svět, roční pojištění pro opakované cesty              |
+| K20R+   | K20R       | zs      | Svět, roční pojištění pro opakované cesty                     |
 
-  
+
 ### Individuální sazby UNIQA pojišťovna, a.s. 
 
 - Označená sady **InsId**: 
@@ -147,16 +160,20 @@ Na základě smlouvy s pojišťovnou je provozovatelem zpřístupněné produkty
 
 - Způsob zadávání produktů 
 
-| Zkratka | InsProdukt | InsType | Poznámka                                           |
-|---------|------------|---------|----------------------------------------------------|
-| nD5S    | D5S        | t       | pouze pro ČR, turs, se stornem                    |
-| nD5S+   | D5S        | zs      | pouze pro ČR, zimní, se stornem                   |
-| nIK5    | IK5        | t       | Evropa/svět, turs, bez storna, individuál         |
-| nIK5+   | IK5        | zs      | Evropa/svět, zimní, bez storna, individuál        |
-| nIK10   | IK10       | t       | Evropa/svět, exclusiv turs, bez storna, individuál|
-| nIK10+  | IK10       | zs      | Evropa/svět, exclusiv zimní, bez storna, individuál|
-| nIK15   | IK15       | t       | Evropa/svět, exclusiv turs, bez storna, individuál|
-| nIK15+  | IK15       | zs      | Evropa/svět, exclusiv zimní, bez storna, individuál|
+| Zkratka | InsProduct | InsType | Poznámka                                                  |
+|---------|------------|---------|-----------------------------------------------------------|
+| IK12    | IK12       | t       | Evropa/svět, individuál turs, bez storna                  |
+| IK12+   | IK12       | zs      | Evropa/svět, individuál zimní, bez storna                 |
+| IK12S   | IK12S      | t       | Evropa/svět, individuál turs, se stornem                  |
+| IK12S+  | IK12S      | zs      | Evropa/svět, individuál zimní, se stornem                 |
+| IK16    | IK16       | t       | Evropa/svět, individuál exclusiv turs, bez storna         |
+| IK16+   | IK16       | zs      | Evropa/svět, individuál exclusiv zimní, bez storna        |
+| IK16S   | IK16S      | t       | Evropa/svět, individuál exclusiv turs, se stornem         |
+| IK16S+  | IK16S      | zs      | Evropa/svět, individuál exclusiv zimní, se stornem        |
+| IK20    | IK20       | t       | Evropa/svět, individuál exclusiv turs, bez storna         |
+| IK20+   | IK20       | zs      | Evropa/svět, individuál exclusiv zimní, bez storna        |
+| IK20S   | IK20S      | t       | Evropa/svět, individuál exclusiv turs, se stornem         |
+| IK20S+  | IK20S      | zs      | Evropa/svět, individuál exclusiv zimní, se stornem        |
 
 
 ### Generali Česká pojišťovna a.s. pojištění k letenkám 
@@ -175,22 +192,22 @@ Na základě smlouvy s pojišťovnou je provozovatelem zpřístupněné produkty
 
 - Způsob zadávání produktů:
    
-| Zkratka              | InsProduct | CancProduct | Poznámka                                                       |
-|----------------------|------------|-------------|----------------------------------------------------------------|
-| Rozsah09             | Rozsah09   | -           | Storno letenky 10.000 Kč, SÚ 0 %                               |
-| Rozsah10             | Rozsah10   | -           | Storno letenky 50.000 Kč, SÚ 0 %                               |
-| Rozsah35             | Rozsah35   | -           | Komplet svět 60 dní turist, LV 10 mil., storno 100t., SÚ 0 %  |
-| Rozsah36             | Rozsah36   | -           | Komplet svět 60 dní pracovní, LV 10 mil., storno 100t., SÚ 0 %|
-| Rozsah37             | Rozsah37   | -           | Komplet svět 60 dní rekreacní sport, LV 10 mil., storno 100t., SÚ 0 %|
-| Rozsah09 + Rozsah14  | Rozsah09   | Rozsah14    | Storno 10.000 Kč + komplet svět bez storna, turist, LV 10 mil.|
-| Rozsah09 + Rozsah15  | Rozsah09   | Rozsah15    | Storno 10.000 Kč + komplet svět bez storna, pracovní, LV 10 mil.|
-| Rozsah09 + Rozsah16  | Rozsah09   | Rozsah16    | Storno 10.000 Kč + komplet svět bez storna, rekreacní sport, LV 10 mil.|
-| Rozsah10 + Rozsah14  | Rozsah10   | Rozsah14    | Storno 50.000 Kč + komplet svět bez storna, turist, LV 10 mil.|
-| Rozsah10 + Rozsah15  | Rozsah10   | Rozsah15    | Storno 50.000 Kč + komplet svět bez storna, pracovní, LV 10 mil.|
-| Rozsah10 + Rozsah16  | Rozsah10   | Rozsah16    | Storno 50.000 Kč + komplet svět bez storna, rekreacní sport, LV 10 mil.|
-| Rozsah11             | Rozsah11   | -           | Komplet svět 60 dní turist, LV 10 mil., storno 100t., SÚ 20 % |
-| Rozsah12             | Rozsah12   | -           | Komplet svět 60 dní pracovní, LV 10 mil., storno 100t., SÚ 20 %|
-| Rozsah13             | Rozsah13   | -           | Komplet svět 60 dní rekreacní sport, LV 10 mil., storno 100t., SÚ 20 %|
+| Zkratka             | InsProduct | CancProduct | Poznámka                                                                                 |
+|---------------------|------------|-------------|-------------------------------------------------------------------------------------------|
+| Rozsah09            | Rozsah09   | -           | Storno letenky 10 tis., SÚ 0 %                                                           |
+| Rozsah10            | Rozsah10   | -           | Storno letenky 50 tis., SÚ 0 %                                                           |
+| Rozsah35            | Rozsah35   | -           | Komplet svět 60 dní, turistická cesta, léčebné výlohy 10 mil., storno 100 tis., SÚ 0 %  |
+| Rozsah36            | Rozsah36   | -           | Komplet svět 60 dní, pracovní cesta, léčebné výlohy 10 mil., storno 100 tis., SÚ 0 %    |
+| Rozsah37            | Rozsah37   | -           | Komplet svět 60 dní, rekreační sporty, léčebné výlohy 10 mil., storno 100 tis., SÚ 0 %  |
+| Rozsah09 + Rozsah14 | Rozsah09   | Rozsah14    | Storno letenky 10 tis. + komplet svět bez storna, turistická cesta, léčebné výlohy 10 mil. |
+| Rozsah09 + Rozsah15 | Rozsah09   | Rozsah15    | Storno letenky 10 tis. + komplet svět bez storna, pracovní cesta, léčebné výlohy 10 mil.   |
+| Rozsah09 + Rozsah16 | Rozsah09   | Rozsah16    | Storno letenky 10 tis. + komplet svět bez storna, rekreační sporty, léčebné výlohy 10 mil. |
+| Rozsah10 + Rozsah14 | Rozsah10   | Rozsah14    | Storno letenky 50 tis. + komplet svět bez storna, turistická cesta, léčebné výlohy 10 mil. |
+| Rozsah10 + Rozsah15 | Rozsah10   | Rozsah15    | Storno letenky 50 tis. + komplet svět bez storna, pracovní cesta, léčebné výlohy 10 mil.   |
+| Rozsah10 + Rozsah16 | Rozsah10   | Rozsah16    | Storno letenky 50 tis. + komplet svět bez storna, rekreační sporty, léčebné výlohy 10 mil. |
+| Rozsah11            | Rozsah11   | -           | Komplet svět 60 dní, turistická cesta, léčebné výlohy 10 mil., storno 100 tis., SÚ 20 % |
+| Rozsah12            | Rozsah12   | -           | Komplet svět 60 dní, pracovní cesta, léčebné výlohy 10 mil., storno 100 tis., SÚ 20 %   |
+| Rozsah13            | Rozsah13   | -           | Komplet svět 60 dní, rekreační sporty, léčebné výlohy 10 mil., storno 100 tis., SÚ 20 % |
 
 
 ### Generali Česká pojišťovna a.s. pojištění krátkodobých pobytů 
@@ -207,8 +224,8 @@ Na základě smlouvy s pojišťovnou je provozovatelem zpřístupněné produkty
 - Prodejní ceny a limity plnění jsou dostupné na stránkách (vyžaduje přihlášení):
   - https://www.everest2003.cz/modules.php?name=help
 
-| Zkratka  | InsProduct | Poznámka                                                                 |
-|----------|------------|--------------------------------------------------------------------------|
+| Zkratka  | InsProduct | Poznámka                                                                    |
+|----------|------------|-----------------------------------------------------------------------------|
 | Rozsah07 | Rozsah07   | Turista svět, LV 6 mil., riziková cesta, storno 100 tis., SÚ 20 %       |
 | Rozsah08 | Rozsah08   | Turista svět, LV 6 mil., riziková cesta, bez storna                     |
 | Rozsah11 | Rozsah11   | Komplet svět 60 dní, turist, LV 10 mil., storno 100 tis., SÚ 20 %       |
@@ -244,8 +261,8 @@ Na základě smlouvy s pojišťovnou je provozovatelem zpřístupněné produkty
 
 - Způsob zadávání produktů: 
 
-| Zkratka    | InsProduct | Poznámka                                                                 |
-|------------|------------|--------------------------------------------------------------------------|
+| Zkratka  | InsProduct | Poznámka                                                                    |
+|----------|------------|-----------------------------------------------------------------------------|
 | Rozsah17   | Rozsah17   | Komplet svět 90 dní, rekreační sport do 70 let, LV 10 mil.               |
 | Rozsah18   | Rozsah18   | Komplet svět 180 dní, rekreační sport do 70 let, LV 10 mil.              |
 | Rozsah19   | Rozsah19   | Komplet svět 365 dní, rekreační sport do 70 let, LV 10 mil.              |
@@ -275,33 +292,33 @@ Na základě smlouvy s pojišťovnou je provozovatelem zpřístupněné produkty
   - https://www.everest2003.cz/modules.php?name=help
 
 -Způsob zadávání produktů
-| Základní sazby                        | InsProduct |
-|--------------------------------------|------------|
+| Základní sazby                   | InsProduct |
+|----------------------------------|------------|
 | Komplet Evropa (K-E)                 | K-E        |
 | Komplet celý svět (K-W)              | K-W        |
 | Komplet svět, bez USA a Kanady       | K-EW       |
 | Storno sólo SÚ 20%                   | STS        |
 
-| Sazby připojištění storna                         | CancProduct |
-|---------------------------------------------------|-------------|
+| Sazby připojištění storna             | CancProduct |
+|-------------------------------------------|-------------|
 | Storno k CP, SÚ 20%                               | PSS20       |
 | Storno k CP, SÚ 0%                                | PSS0        |
 | Storno k CP s karanténou,  SÚ 20%                 | PSKS20      |
 
-| Další připojištění              | Název značky = 1/0 |
-|---------------------------------|--------------------|
-| Rizikové sporty                 | InsSport           |
-| Drink povolen                   | InsDrink           |
-| Připojištění práce a studia     | InsWork            |
-| Chronické onemocnění            | InsChronic         |
-| Autoasistence                   | InsAuto            |
+| Další připojištění          | Název značky = 1/0 |
+|-----------------------------|--------------------|
+| Rizikové sporty             | InsSport           |
+| Drink povolen               | InsDrink           |
+| Připojištění práce a studia | InsWork            |
+| Chronické onemocnění        | InsChronic         |
+| Autoasistence               | InsAuto            |
 
 ## Popis metod
 
 ### Dotaz na získání nabídky produktů (`[InsuranceOrder]`)
 
-| Název pole   | Popis                             | Typ / Formát         | Povinné  | Poznámka |
-|--------------|------------------------------------|-----------------------|-----------|----------|
+| Název pole  | Popis                                     | Typ / Formát          | Povinné | Poznámka |
+|-------------|-------------------------------------------|-----------------------|---------|----------|
 | `UserKey`    | Identifikátor prodejce             | `string` (max 64)     | Ano       | Slouží k autorizaci dotazu |
 | `OrderId`    | Číslo objednávky                   | `string` (max 30)     | Ne        | -        |
 | `DateFrom`   | Počátek pojištění                  | `date` (`dd.mm.yyyy`) | Ano       | -        |
@@ -346,14 +363,14 @@ Na základě smlouvy s pojišťovnou je provozovatelem zpřístupněné produkty
 
 #### Struktura odpovědi: `InsuranceResponse`
 
-| Název pole           | Popis                                     | Typ / Formát     | Poznámka |
-|----------------------|--------------------------------------------|------------------|----------|
+| Název pole    | Popis                               | Typ / Formát     | Poznámka |
+|---------------|-------------------------------------|------------------|----------|
 | `ProductData`        | Sada kalkulovaných produktů                | `object`         | Obsahuje 1..N položek ve tvaru `Product_X` |
 
 Struktura objektu `Product_X` (např. `Product_1`)
 
-| Název pole     | Popis                                              | Typ / Formát     | Poznámka |
-|----------------|-----------------------------------------------------|------------------|----------|
+| Název pole     | Popis                                | Typ / Formát       | Poznámka |
+|----------------|--------------------------------------|--------------------|----|
 | `InsProduct`   | Kód pojistného produktu                            | `string` (max 5) | Např. `IK5S` |
 | `TotalPremium` | Celková výše pojistného                           | `float`          | V měně dle pole `Currency` |
 | `Currency`     | Měna pojistného                                    | `string` (3 znaky) | Např. `CZK` |
@@ -381,8 +398,8 @@ Struktura objektu `Product_X` (např. `Product_1`)
 
 #### Definice parametrů metody:
 
-| Název pole    | Popis                             | Typ / Formát           | Povinné  | Poznámka |
-|---------------|------------------------------------|------------------------|----------|----------|
+| Název pole    | Popis                                  | Typ / Formát           | Povinné  | Poznámka |
+|---------------|----------------------------------------|------------------------|----------|----------|
 | `UserKey`     | Identifikátor prodejce            | `string` (max 64)      | Ano      | Slouží k autorizaci dotazu |
 | `OrderId`     | Číslo objednávky                  | `string` (max 30)      | Ne      | Vlastní číselná řada |
 | `DateFrom`    | Počátek pojištění                 | `date` (`dd.mm.yyyy`)  | Ano      | - |
@@ -404,8 +421,8 @@ Struktura objektu `Product_X` (např. `Product_1`)
 
 **Objekty osob (`Passenger`) jsou prvky objektu `Passengers`**
 
-| Název pole    | Popis                          | Typ / Formát          | Povinné | Poznámka                                              |
-| ------------- | ------------------------------ | --------------------- | ------- | ----------------------------------------------------- |
+| Název pole    | Popis                              | Typ / Formát          | Povinné | Poznámka                                    |
+|---------------|------------------------------------|-----------------------|---------|---------------------------------------------|
 | `PersonId`    | Identifikátor osoby            | `integer`             | Ano     | Pořadové číslo osoby                                  |
 | `LastName`    | Příjmení                       | `string` (max 80)     | Ano     | Uvádět bez titulů                                     |
 | `FirstName`   | Jméno                          | `string` (max 80)     | Ano     | Uvádět bez titulů                                     |
@@ -456,21 +473,21 @@ Struktura objektu `Product_X` (např. `Product_1`)
 ```
 #### Struktura odpovědi: `InsuranceResponse`
 
-| Název pole      | Popis                           | Typ / Formát       | Poznámka                   |
-| --------------- | ------------------------------- | ------------------ | -------------------------- |
-| `OrderId`       | Číslo objednávky                | `string`           | Identifikátor objednávky   |
-| `InsId`         | Kód pojišťovny                  | `string`           | Dle číselníku pojišťoven   |
-| `TotalPremium`  | Celková výše pojistného         | `float`            | Za všechny osoby celkem    |
-| `Currency`      | Měna pojistného                 | `string` (3 znaky) | ISO 4217 kód měny          |
-| `PassengerData` | Informace o pojištěných osobách | `object`           | Viz podřízená tabulka níže |
-| `ContractNo`    | Číslo smlouvy                   | `string`           | Generované číslo smlouvy   |
-| `AccessKey`     | Klíč pro přístup k datům        | `string`           | Hash přístupového klíče    |
-| `TID`           | Token pro přístup k dokumentům obch.případu| `string`|    |
+| Název pole      | Popis                               | Typ / Formát       | Poznámka                 |
+|-----------------|-------------------------------------|--------------------|--------------------------|
+| `OrderId`       | Číslo objednávky                    | `string`           | Identifikátor objednávky |
+| `InsId`         | Kód pojišťovny                      | `string`           | Dle číselníku pojišťoven |
+| `TotalPremium`  | Celková výše pojistného             | `float`            | Za všechny osoby celkem  |
+| `Currency`      | Měna pojistného                     | `string` (3 znaky) | ISO 4217 kód měny        |
+| `PassengerData` | Informace o pojištěných osobách     | `object`           | Viz tabulka níže         |
+| `ContractNo`    | Číslo smlouvy                       | `string`           | Generované číslo smlouvy |
+| `AccessKey`     | Klíč pro přístup k datům            | `string`           | Hash přístupového klíče  |
+| `TID`           | Token pro přístup k dokumentům obch.případu | `string`  | -                        |
 
 
 **Struktura objektu PassengerData → Person_X**
-| Název pole      | Popis                   | Typ / Formát     | Poznámka                        |
-| --------------- | ----------------------- | ---------------- | ------------------------------- |
+| Název pole      | Popis                       | Typ / Formát     | Poznámka                            |
+|-----------------|-----------------------------|--------------------|----------------------------------|
 | `PersonId`      | ID osoby dle požadavku  | `string`         | Shodné s `PersonId` v požadavku |
 | `PersonNr`      | Interní číslo osoby     | `integer`        | Přiděleno pojišťovnou           |
 | `InsProduct`    | Kód pojistného produktu | `string` (max 5) | -                               |
@@ -536,13 +553,13 @@ V metodě je povinné některé z polí `OrderId` nebo  `ContractNo`
 #### Struktura odpovědi: `PaymentConfirmationResponse`
 
 | Název pole | Popis            | Typ / Formát      |
-| ---------- | ---------------- | ----------------- |
+|------------|------------------|-------------------|
 | `OrderId`  | Číslo objednávky | `string` (max 30) |
 
 Contracts (obsahuje 1..N prvků Contract_XXXX)
 
 | Název pole     | Popis                | Typ / Formát       |
-| -------------- | -------------------- | ------------------ |
+|----------------|----------------------|--------------------|
 | `AccessKey`    | Přístupový kód       | `string` (max 64)  |
 | `ContractNo`   | Číslo smlouvy/návrhu | `string` (max 10)  |
 | `InsId`        | Kód pojišťovny       | `enum`             |
@@ -553,7 +570,7 @@ Contracts (obsahuje 1..N prvků Contract_XXXX)
 Passengers (každá smlouva obsahuje 1..N prvků Person_XX)
 
 | Název pole      | Popis                               | Typ / Formát     |
-| --------------- | ----------------------------------- | ---------------- |
+|-----------------|-------------------------------------|------------------|
 | `PersonId`      | Identifikátor osoby                 | `integer`        |
 | `PersonNr`      | Číslo záznamu osoby u provozovatele | `integer`        |
 | `InsProduct`    | Kód sazby                           | `string` (max 6) |
@@ -595,8 +612,8 @@ Passengers (každá smlouva obsahuje 1..N prvků Person_XX)
 Klientovi je možné zaslat návrh pojištění pomocí metody `SendEmail`
 
 #### Definice parametrů metody `SendEmail`
-| Název pole   | Popis                  | Typ / Formát      | Povinné     |
-| ------------ | ---------------------- | ----------------- | ----------- |
+| Název pole   | Popis                    | Typ / Formát      | Povinné               |
+|--------------|--------------------------|-------------------|-----------------------|
 | `UserKey`    | Identifikátor prodejce | `string` (max 64) | ano         |
 | `AccessKey`  | Přístupový kód         | `string` (max 64) | ano         |
 | `OrderId`    | Číslo objednávky       | `string` (max 30) | Podmíněně\* |
@@ -622,7 +639,7 @@ V metodě je povinné některé z polí `OrderId` nebo  `ContractNo`
 #### Struktura odpovědi `SendEmailResponse`:
 
 | Název pole   | Popis                | Typ / Formát      |
-| ------------ | -------------------- | ----------------- |
+|--------------|----------------------|-------------------|
 | `OrderId`  | Číslo objednávky | `string` (max 30) |
 | `ContractNo` | Číslo smlouvy/návrhu | `string` (max 10) |
 | `Status`     | Stav smlouvy         | `enum`            |
@@ -673,13 +690,13 @@ V metodě je povinné některé z polí `OrderId` nebo  `ContractNo`
 #### Struktura odpovědi `InfoResponse`:
 
 | Název pole | Popis            | Typ / Formát      | Použití          |
-| ---------- | ---------------- | ----------------- | ---------------- |
+|------------|------------------|-------------------|------------------|
 | `OrderId`  | Číslo objednávky | `string` (max 30) | Objednávkový kód |
 
 **Contracts – Smlouvy / návrhy (1..N prvků Contract_XXXX)**
 
-| Název pole     | Popis                                    | Typ / Formát        |
-|----------------|-------------------------------------------|---------------------|
+| Název pole     | Popis                                       | Typ / Formát        |
+|----------------|---------------------------------------------|---------------------|
 | `ContractNo`   | Číslo smlouvy/návrhu                      | `string` (max 10)   |
 | `AccessKey`    | Přístupový kód (autorizace objednávky)   | `string` (max 64)   |
 | `TID`          | Token pro přístup k dokumentům obch.případu| `string` (max 64)   |
@@ -699,8 +716,8 @@ V metodě je povinné některé z polí `OrderId` nebo  `ContractNo`
 
 **Passengers – Osoby (1..N prvků Person_XX)**
 
-| Název pole         | Popis                                          | Typ / Formát        | Poznámka             |
-| ------------------ | ---------------------------------------------- | ------------------- | -------------------- |
+| Název pole     | Popis                                         | Typ / Formát        | Poznámka         |
+|----------------|-----------------------------------------------|---------------------|------------------|
 | `PersonId`         | Identifikátor osoby                            | `int`               |                      |
 | `LastName`         | Příjmení                                       | `string` (max 80)   | bez titulů    |
 | `FirstName`        | Jméno                                          | `string` (max 80)   | bez titulů    |
@@ -821,8 +838,8 @@ Pro zrušení objednávky je určena metoda `OrderDelete`.
 
 ### Definice metody pro výmaz záznamu
 
-| Název pole    | Popis                                                      | Typ / Formát       | Povinné |
-|---------------|-------------------------------------------------------------|--------------------|---------|
+| Název pole   | Popis                                                            | Typ / Formát      | Povinné |
+|--------------|------------------------------------------------------------------|-------------------|---------|
 | `UserKey`     | Identifikátor prodejce (autorizace dotazu)                 | `string` (max 64)  | Ano     |
 | `AccessKey`   | Přístupový kód (autorizace objednávky)                     | `string` (max 64)  | Ano     |
 | `OrderId`     | Číslo objednávky                                            | `string` (max 30)  | Ano*    |
@@ -845,12 +862,12 @@ Pro zrušení objednávky je určena metoda `OrderDelete`.
 
 | Název pole     | Popis               | Typ / Formát       | Povinné |
 |----------------|---------------------|---------------------|----------|
-| `OrderId`      | Číslo objednávky     | `string` (max 30)   | Ano      |
+
 
 **Objekt `Contracts` (může obsahovat více prvků `Contract_XXXX`)**
 
-| Název pole       | Popis                        | Typ / Formát       | 
-|------------------|-------------------------------|---------------------|
+| Název pole       | Popis                            | Typ / Formát       |
+|------------------|----------------------------------|--------------------|
 | `ContractNo`     | Číslo smlouvy/návrhu          | `string` (max 10)   |
 | `TotalPremium`   | Celkové pojistné              | `float`             |
 | `Currency`       | Měna (ISO kód, např. CZK)     | `string` (3 znaky)  |
@@ -858,8 +875,8 @@ Pro zrušení objednávky je určena metoda `OrderDelete`.
 
 **Objekt `DeletedPassengers`**
 
-| Název pole     | Popis                   | Typ / Formát       | 
-|----------------|--------------------------|---------------------|
+| Název pole     | Popis                   | Typ / Formát        |
+|----------------|-------------------------|-|
 | `PersonId`     | Identifikátor osoby      | `string` nebo `int` |
 | `PersonNr`     | Číslo záznamu osoby      | `string` nebo `int` |
 | `Status`       | Stav osoby (`X` = smazáno)| `enum`              |
@@ -893,8 +910,8 @@ Pro zrušení objednávky je určena metoda `OrderDelete`.
 
 Nahlášení storna zájezdu/služby včetně detailního vyúčtování je určena `TripCancellation`
 
-| Název pole                       | Popis                                                   | Typ / Formát        | Povinné |
-| -------------------------------- | ------------------------------------------------------- | ------------------- | ------- |
+| Název pole                       | Popis                                                          | Typ / Formát        | Povinné |
+|----------------------------------|----------------------------------------------------------------|---------------------|---------|
 | `UserKey`                        | Identifikátor prodejce                                  | `string` (max 64)   | Ano     |
 | `AccessKey`                      | Přístupový kód                                          | `string` (max 64)   | Ano     |
 | `Organizer`                      | Pořadatel zájezdu / prodejce stornovaných služeb        | `string`            | Ano     |
@@ -941,8 +958,8 @@ Nahlášení storna zájezdu/služby včetně detailního vyúčtování je urč
 ```
 #### Struktura odpovědi: `TripCancellationResponse`
 
-| Název pole | Popis                                     | Typ / Formát   | 
-| ---------- | ----------------------------------------- | -------------- | 
+| Název pole | Popis                                     | Typ / Formát   |
+|------------|-------------------------------------------|----------------| 
 | `FormUrl`  | URL adresa formuláře pro doplnění         | `string (URL)` |
 | `FormFile` | URL ke stažení PDF formuláře              | `string (URL)` |
 | `Status`   | Stav požadavku: `OK` nebo `ErrorResponse` | `string`       |
@@ -961,8 +978,8 @@ Nahlášení storna zájezdu/služby včetně detailního vyúčtování je urč
 
 ### Příloha: Seznam chybových kódu v ErrorResponse
 
-| Číslo chyby | Popis chyby                                  | Význam                                                                                      |
-| ----------- | -------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Číslo chyby | Popis chyby                                  | Význam                                                                                    |
+|-------------|----------------------------------------------|-------------------------------------------------------------------------------------------|
 | 1           | Unknown Status.                              | Neznámý status.                                                                             |
 | 2           | UserKey error.                               | Chyba v UserKey.                                                                            |
 | 3           | DateFrom error.                              | Chyba v DateFrom.                                                                           |
