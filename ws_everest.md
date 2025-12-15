@@ -104,7 +104,7 @@ Na základě smlouvy s pojišťovnou je provozovatelem zpřístupněné produkty
 ### UNIQA pojišťovna, a.s.
 
 - Označená sady **InsId**: 
-  -  Y
+  -  26U
 - Typ prodeje **ticketing**:
   -  N
 - Typ pojištění **InsType**:
@@ -147,7 +147,7 @@ Na základě smlouvy s pojišťovnou je provozovatelem zpřístupněné produkty
 ### Individuální sazby UNIQA pojišťovna, a.s. 
 
 - Označená sady **InsId**: 
-  -  Y
+  -  26K
 - Typ prodeje **ticketing**:
   -  N
 - Typ pojištění **InsType**:
