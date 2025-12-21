@@ -486,12 +486,13 @@ Struktura objektu `Product_X` (např. `Product_1`)
 
 
 **Struktura objektu PassengerData → Person_X**
-| Název pole      | Popis                       | Typ / Formát     | Poznámka                            |
-|-----------------|-----------------------------|--------------------|----------------------------------|
-| `PersonId`      | ID osoby dle požadavku  | `string`         | Shodné s `PersonId` v požadavku |
-| `PersonNr`      | Interní číslo osoby     | `integer`        | Přiděleno pojišťovnou           |
-| `InsProduct`    | Kód pojistného produktu | `string` (max 5) | -                               |
-| `PersonPremium` | Pojistné za osobu       | `float`          | -                               |
+
+| Název pole      | Popis                       | Typ / Formát       | Poznámka                            |
+|-----------------|-----------------------------|--------------------|-------------------------------------|
+| `PersonId`      | ID osoby dle požadavku      | `string`           | Shodné s `PersonId` v požadavku     |
+| `PersonNr`      | Interní číslo osoby         | `integer`          | Přiděleno pojišťovnou               |
+| `InsProduct`    | Kód pojistného produktu     | `string` (max 5)   | -                                   |
+| `PersonPremium` | Pojistné za osobu           | `float`            | -                                   |
 
 
 #### Příklad odpovědi
@@ -612,13 +613,14 @@ Passengers (každá smlouva obsahuje 1..N prvků Person_XX)
 Klientovi je možné zaslat návrh pojištění pomocí metody `SendEmail`
 
 #### Definice parametrů metody `SendEmail`
-| Název pole   | Popis                    | Typ / Formát      | Povinné               |
-|--------------|--------------------------|-------------------|-----------------------|
-| `UserKey`    | Identifikátor prodejce | `string` (max 64) | ano         |
-| `AccessKey`  | Přístupový kód         | `string` (max 64) | ano         |
-| `OrderId`    | Číslo objednávky       | `string` (max 30) | Podmíněně\* |
-| `ContractNo` | Číslo smlouvy/návrhu   | `string` (max 10) | Podmíněně\* |
-| `Email`      | Email příjemce         | `string` (max 64) | ne (odesání na email z objednávky)|
+
+| Název pole   | Popis                                      | Typ / Formát      | Povinné |
+|--------------|---------------------------------------------|--------------------|-----------------------------|
+| `UserKey`    | Identifikátor prodejce                     | `string` (max 64)  | ano                           | 
+| `AccessKey`  | Přístupový kód                             | `string` (max 64)  | ano                          | 
+| `OrderId`    | Číslo objednávky                           | `string` (max 30)  | Podmíněně*                           |
+| `ContractNo` | Číslo smlouvy/návrhu                       | `string` (max 10)  | Podmíněně*                            | 
+| `Email`      | Email příjemce                             | `string` (max 64)  | ne (odeslání na email z objednávky)|
 
 V metodě je povinné některé z polí `OrderId` nebo  `ContractNo`
 
@@ -665,12 +667,13 @@ V metodě je povinné některé z polí `OrderId` nebo  `ContractNo`
 Ziskání podrobných informací o stavu návrhu pomocí metody `OrderInfo`
 
 #### Definice parametrů metody `OrderInfo`
-| Název pole    | Popis                                      | Typ / Formát      | Povinné | 
-|---------------|---------------------------------------------|--------------------|-----------------------------|
-| `UserKey`     | Identifikátor prodejce                     | `string` (max 64)  | ano                           | 
-| `AccessKey`   | Přístupový kód                             | `string` (max 64)  | ano                          | 
-| `OrderId`     | Číslo objednávky                           | `string` (max 30)  | Podmíněně*                           |
-| `ContractNo`  | Číslo smlouvy/návrhu                       | `string` (max 10)  | Podmíněně*                            | 
+
+| Název pole   | Popis                    | Typ / Formát       | Povinné      |
+|--------------|--------------------------|--------------------|--------------| 
+| `UserKey`    | Identifikátor prodejce   | `string` (max 64)  | Ano          | 
+| `AccessKey`  | Přístupový kód           | `string` (max 64)  | Ano          | 
+| `OrderId`    | Číslo objednávky         | `string` (max 30)  | Podmíněně*   |
+| `ContractNo` | Číslo smlouvy/návrhu     | `string` (max 10)  | Podmíněně*   |
 
 V metodě je povinné některé z polí `OrderId` nebo  `ContractNo`
 
