@@ -291,13 +291,14 @@ Na základě smlouvy s pojišťovnou je provozovatelem zpřístupněné produkty
 - Prodejní ceny a limity plnění jsou dostupné na stránkách (vyžaduje přihlášení):
   - https://www.everest2003.cz/modules.php?name=help
 
--Způsob zadávání produktů
-| Základní sazby                   | InsProduct |
-|----------------------------------|------------|
-| Komplet Evropa (K-E)                 | K-E        |
-| Komplet celý svět (K-W)              | K-W        |
-| Komplet svět, bez USA a Kanady       | K-EW       |
-| Storno sólo SÚ 20%                   | STS        |
+- Způsob zadávání produktů
+
+| Základní sazby                     | InsProduct |
+|------------------------------------|------------|
+| Komplet Evropa (K-E)               | K-E        |
+| Komplet celý svět (K-W)            | K-W        |
+| Komplet svět, bez USA a Kanady     | K-EW       |
+| Storno sólo SÚ 20%                 | STS        |
 
 | Sazby připojištění storna             | CancProduct |
 |-------------------------------------------|-------------|
@@ -863,8 +864,9 @@ Pro zrušení objednávky je určena metoda `OrderDelete`.
 
 #### Struktura odpovědi: `OrderDeleteResponse`
 
-| Název pole     | Popis               | Typ / Formát       | Povinné |
-|----------------|---------------------|---------------------|----------|
+| Název pole | Popis            | Typ / Formát      |
+|------------|------------------|-------------------|
+| `OrderId`  | Číslo objednávky | `string` (max 30) |
 
 
 **Objekt `Contracts` (může obsahovat více prvků `Contract_XXXX`)**
